@@ -1,0 +1,44 @@
+@model Curso
+@{
+    ViewData["Title"] = "Matrículas por curso";
+}
+
+<h2>@Model.Nombre</h2>
+<p><strong>Código:</strong> @Model.Codigo</p>
+
+<table class="table table-bordered align-middle">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var matricula in Model.Matriculas.OrderByDescending(m => m.FechaRegistro))
+    {
+        <tr>
+            <td>@(matricula.Usuario?.Email ?? matricula.UsuarioId)</td>
+            <td>@matricula.FechaRegistro.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+            <td><span class="badge bg-info text-dark">@matricula.Estado</span></td>
+            <td class="d-flex gap-2 flex-wrap">
+                <form method="post" asp-action="CambiarEstadoMatricula">
+                    <input type="hidden" name="matriculaId" value="@matricula.Id" />
+                    <input type="hidden" name="cursoId" value="@Model.Id" />
+                    <input type="hidden" name="estado" value="Confirmada" />
+                    <button class="btn btn-sm btn-success">Confirmar</button>
+                </form>
+                <form method="post" asp-action="CambiarEstadoMatricula">
+                    <input type="hidden" name="matriculaId" value="@matricula.Id" />
+                    <input type="hidden" name="cursoId" value="@Model.Id" />
+                    <input type="hidden" name="estado" value="Cancelada" />
+                    <button class="btn btn-sm btn-danger">Cancelar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-outline-secondary">Volver</a>

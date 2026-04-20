@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3 border">
+    <div class="container-fluid py-4">
+        <h1 class="display-6 fw-bold">Portal Académico — Gestión de Cursos y Matrículas</h1>
+        <p class="col-md-10 fs-5">Proyecto MVC con ASP.NET Core 8, Identity, EF Core, SQLite, Session y Redis para catálogo, inscripciones y panel de coordinador.</p>
+        <div class="d-flex gap-2">
+            <a asp-controller="Cursos" asp-action="Index" class="btn btn-primary btn-lg">Ver catálogo</a>
+            <a asp-controller="Coordinador" asp-action="Index" class="btn btn-outline-secondary btn-lg">Panel Coordinador</a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5>Autenticación</h5>
+                <p>Identity habilitado para estudiantes y rol Coordinador.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5>Validaciones</h5>
+                <p>Cupo máximo, matrícula única por curso y detección de solapamiento horario.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5>Rendimiento</h5>
+                <p>Último curso visitado en sesión y catálogo activo cacheado por 60 segundos.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: portal-academico-examen
+    env: dotnet
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet out/PortalAcademicoExamen.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:${PORT}
+      - key: ConnectionStrings__DefaultConnection
+        value: Data Source=portalacademico.db
+      - key: Redis__ConnectionString
+        sync: false
